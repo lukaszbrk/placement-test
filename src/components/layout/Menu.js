@@ -42,7 +42,7 @@ export default class MainMenu extends Component {
               as={NavLink}  to="/test"
             />
             <Menu.Item
-              name="Other"
+              name="Inne"
               active={activeItem === "Other"}
               onClick={this.handleItemClick}
               as={NavLink}  to="/other"

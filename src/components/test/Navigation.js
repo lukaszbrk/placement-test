@@ -8,7 +8,7 @@ const Navigation = () => (
     {value => (
       <Pagination
         activePage={value.activePage}
-        totalPages={value.questionsSelected.length}
+        totalPages={value.questionsReady.length}
         onPageChange={value.handlePaginationChange}
         
       />

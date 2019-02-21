@@ -3,7 +3,7 @@ import { Divider, Header, Segment } from "semantic-ui-react";
 import { Consumer } from "../../../context";
 import { Checkbox } from "semantic-ui-react";
 
-const Question = ({ question, method }) => (
+const Question = ({ question, update }) => (
   <Segment>
     <Header as="h3">Pytanie</Header>
 
@@ -24,7 +24,7 @@ const Question = ({ question, method }) => (
             name={item}
             value={item}
             checked={question["Ticked"] === item}
-            onChange={method}
+            onChange={update}
           />
 
           <br />

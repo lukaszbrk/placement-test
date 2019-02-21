@@ -48,6 +48,7 @@ export class Provider extends Component {
       }),
 
     handleChecked: (e, { value }) => {
+      console.log(e.target.value)
       const ticked = [...this.state.questionsReady];
       ticked[this.state.activePage - 1]["Ticked"] = e.target.value;
       this.setState(ticked);

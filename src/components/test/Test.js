@@ -10,6 +10,7 @@ const StartTest = () => (
   <div>
     <h1>Start Test</h1>
     <SelectLevel/>
+    <br></br>
     <StartButton />
   </div>
 );
@@ -33,9 +34,7 @@ const SelectLevel = () => (
     {value => (
       <div>
               <Form>
-        <Form.Field>
-          Wybrany poziom: <b>{value.level}</b>
-        </Form.Field>
+
         <Form.Field>
           <Radio
             label='Poziom podstawowy'
@@ -54,15 +53,7 @@ const SelectLevel = () => (
             onChange={value.handleChooseLevel}
           />
         </Form.Field>
-        <Form.Field>
-          <Radio
-            label='Poziom podstawowy i rozszerzony'
-            name='radioGroup'
-            level='b_and_adv'
-            checked={value.level === 'b_and_adv'}
-            onChange={value.handleChooseLevel}
-          />
-        </Form.Field>
+
       </Form>
     
  

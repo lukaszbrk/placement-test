@@ -51,9 +51,7 @@ export class Provider extends Component {
       const ticked = [...this.state.questionsReady];
       ticked[this.state.activePage - 1]["Ticked"] = e.target.value;
       this.setState(ticked);
-      console.log(
-        this.state.questionsReady[this.state.activePage - 1]["Ticked"]
-      );
+   
     }
   };
 

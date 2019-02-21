@@ -1,46 +1,36 @@
 import React from "react";
 import { Divider, Header, Segment } from "semantic-ui-react";
 import { Consumer } from "../../../context";
-import {Checkbox } from "semantic-ui-react";
+import { Checkbox } from "semantic-ui-react";
 
-const Question = () => (
+const Question = ({ question, method }) => (
   <Segment>
     <Header as="h3">Pytanie</Header>
 
-    <Consumer>
-      {value => <h1>{value.questionsReady[value.activePage - 1].Text}</h1>}
-    </Consumer>
+    <h1>{question.Text}</h1>
+
     <Divider section />
 
     <Header as="h3">Odpowiedzi</Header>
     <Segment>
       <Header as="h3"> </Header>
 
-        <Consumer>
-          {value =>
-            value.questionsReady[value.activePage - 1]["Shuffled_keys"].map(item => (
-                <span>
-            
-                    <Checkbox id = {item}
-                      radio
-                      label={value.questionsReady[value.activePage - 1]['All_with_keys'][item]}
-                      //label={item}
-                      name={item}
-                      //value= {value.questionsReady[value.activePage - 1]['All_with_keys'][item]}
-                       value= {item}
-                      //checked={value.questionsReady[value.activePage - 1]['Ticked'] === value} //1 - ticked item 2 - odpowiedz
-                      checked={value.questionsReady[value.activePage - 1]['Ticked'] === item} //1 - ticked item 2 - kod odpowiedzi
-                      onChange={value.handleChecked}
-                    />
-          
+      {question["Shuffled_keys"].map(item => (
+        <span>
+          <Checkbox
+            id={item}
+            radio
+            label={question["All_with_keys"][item]}
+            name={item}
+            value={item}
+            checked={question["Ticked"] === item}
+            onChange={method}
+          />
 
-                  <br />
-                  <br />
-                </span>
-              ))
-          }
-        </Consumer>
-
+          <br />
+          <br />
+        </span>
+      ))}
     </Segment>
   </Segment>
 );

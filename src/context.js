@@ -20,10 +20,42 @@ export class Provider extends Component {
     buttonPressed: false,
     buttonPressable: false,
 
-    //modal
+    //modal handling
     modalOpen: false,
 
-  
+    modalOpenResults: false,
+
+    handleClose: e => {
+      this.setState({ modalOpen: false });
+
+      if (e.target.value === "Usuń") {
+        console.log("Usuwam");
+        this.resetForm();
+      } else {
+        console.log("Nie usuwaj wyników");
+      }
+    },
+
+    handleCloseResults: e => {
+      this.setState({ modalOpenResults: false });
+
+      if (e.target.value === "NowyTest") {
+        console.log("Nowy Test");
+        this.resetForm();
+      } else {
+        console.log("Powrót do testu");
+      }
+    },
+
+    handleOpen: () => this.setState({ modalOpen: true }),
+
+    handleOpenResults: () => {
+      this.state.showResults();
+
+      this.setState({ modalOpenResults: true });
+    },
+
+    //clear and results methods
 
     //pagination
     handlePaginationChange: (e, { activePage }) =>
@@ -58,28 +90,14 @@ export class Provider extends Component {
       const ticked = [...this.state.questionsReady];
       ticked[this.state.activePage - 1]["Ticked"] = e.target.value;
       //delay after answering
-      this.setState({ questionsReady: ticked }, () => {
+      this.setState({ questionsReady: ticked }, () => { if (this.state.activePage>=this.state.questionsReady.length) {} else {
         setTimeout(() => {
           this.setState({ activePage: this.state.activePage + 1 });
-        }, 1500);
-      });
+        }, 1200);
+      }});
     },
 
-    //modal handlers
-    handleOpen: () => this.setState({ modalOpen: true }),
-
-    handleClose: e => {
-      this.setState({ modalOpen: false });
-
-      if (e.target.value === "Usuń") {
-        console.log("Usuwam");
-        this.resetForm();
-      } else {
-        console.log("Nie usuwam");
-      }
-    },
-
-    showResults: (e, { value }) => {
+    showResults: () => {
       var length = this.state.questionsReady.length;
       var rightAnswers = 0;
 
@@ -108,12 +126,26 @@ export class Provider extends Component {
     var temp = sessionStorage.getItem("Questions");
     var q = JSON.parse(temp);
     console.log(this.baseState);
+    //console.log(viewName);
 
     this.setState(this.baseState);
 
-    this.setState({ questions: q }, () => {
-      console.log(this.state.questions);
-    });
+    this.setState({ questions: q });
+  };
+  resetAnswers = () => {
+    {
+      /* 
+
+  resetForm = (baseState)=> {
+    console.log("Pytania do wczytania: "+this.questions);
+    console.log("Stan bazowy: "+this.questions);
+    var temp = sessionStorage.getItem('Questions');
+    var q = JSON.parse(temp);
+
+    this.setState({baseState}, ()=>this.setState({questions:q}));
+  };
+*/
+    }
   };
 
   filterbyLevel = question => {

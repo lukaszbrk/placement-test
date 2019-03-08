@@ -80,9 +80,56 @@ const Test = () => (
                 <Grid.Column>
                   <Button>Brakujące</Button>
 
-                  <Button onClick={value.showScreen} id="results">
-                    Wyniki
-                  </Button>
+             
+
+
+
+
+                <Modal
+                    trigger={
+                      <Button onClick={value.handleOpenResults}>
+                        Pokaż wyniki
+                      </Button>
+                    }
+                    open={value.modalOpenResults}
+                    onClose={value.handleCloseResults}
+                    basic
+                    size="small"
+                  >
+                    <Header icon="browser" content="Wyniki" />
+                    <Modal.Content>
+                      <h3>Liczba prawidłowych odpowiedzi: {" "+value.results}</h3>
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button
+                        color="red"
+                        onClick={value.handleCloseResults}
+                        inverted
+                        value="NowyTest"
+                      >
+                        <Icon name="checkmark" /> Nowy test
+                      </Button>
+                      <Button
+                        onClick={value.handleCloseResults}
+                        inverted
+                        value="Anuluj"
+                      >
+                        <Icon name="checkmark" /> Anuluj
+                      </Button>
+                    </Modal.Actions>
+                  </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
                 </Grid.Column>
 
                 <Grid.Column>

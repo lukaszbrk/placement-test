@@ -19,6 +19,7 @@ export class Provider extends Component {
     //buttons
     buttonPressed: false,
     buttonPressable: false,
+    mode:'selectingLevel',
 
     //modal handling
     modalOpen: false,
@@ -39,12 +40,14 @@ export class Provider extends Component {
     handleCloseResults: e => {
       this.setState({ modalOpenResults: false });
 
-      if (e.target.value === "NowyTest") {
+      if (e.target.value === "NewTest") {
         console.log("Nowy Test");
         this.resetForm();
-      } else {
-        console.log("Powrót do testu");
+      } else if (e.target.value === "Review"){
+        
+        this.setState({ mode: 'Reviewing' });
       }
+      else {}
     },
 
     handleOpen: () => this.setState({ modalOpen: true }),
@@ -62,7 +65,7 @@ export class Provider extends Component {
       this.setState({ activePage }),
 
     //select level
-    handleSelectLevel: e => this.setState({ buttonPressed: true }),
+    handleSelectLevel: e => this.setState({ mode: 'Testing' }),
 
     handleChooseLevel: (e, { level }) =>
       this.setState({ level, buttonPressable: true }, () => {

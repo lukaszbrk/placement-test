@@ -82,7 +82,7 @@ const Test = () => (
                       <Navigation />
                     </Grid.Column>
                     <Grid.Column>
-                      <Button>Brakujące</Button>
+                      <Button onClick={value.showMissing}>Brakujące</Button>
 
                       <Modal
                         trigger={

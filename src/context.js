@@ -100,6 +100,26 @@ export class Provider extends Component {
       }});
     },
 
+    showMissing: () => {
+
+      console.log("Missing")
+
+       var length = this.state.questionsReady.length;
+    
+
+      for (var i = 0; i < length; i++) {
+        //console.log(Object.keys(this.state.questionsReady[i]));
+
+        if (this.state.questionsReady[i]["Ticked"] === "") {
+ 
+          this.setState({ activePage: i+1 });
+          break;
+        }
+      }
+
+      
+    },
+
     showResults: () => {
       var length = this.state.questionsReady.length;
       var rightAnswers = 0;

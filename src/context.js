@@ -5,27 +5,31 @@ const Context = React.createContext();
 
 export class Provider extends Component {
   state = {
+
+    //for pagination
     activePage: 1,
 
     //questions
-    questions: [],
-    questionsSelected: [],
-    questionsReady: [],
+    questions: [], //retrieved
+    questionsSelected: [], //selected
+    questionsReady: [], //after adding new properies
 
     results: "",
 
-    level: "",
+    level: "", // testlevel
     levelSelected: false,
+
     //buttons
-    buttonPressed: false,
-    buttonPressable: false,
-    mode:'selectingLevel',
+   
+    buttonPressable: false, //after selecting the testlevel
+    mode:'selectingLevel', //default mode; other: 'Testing' and 'Reviewing'
 
     //modal handling
     modalOpen: false,
 
     modalOpenResults: false,
 
+    //  remove answers only (todo)
     handleClose: e => {
       this.setState({ modalOpen: false });
 
@@ -36,7 +40,7 @@ export class Provider extends Component {
         console.log("Nie usuwaj wyników");
       }
     },
-
+    // modals for the new test and reviewing
     handleCloseResults: e => {
       this.setState({ modalOpenResults: false });
 
@@ -46,27 +50,29 @@ export class Provider extends Component {
       } else if (e.target.value === "Review"){
         
         this.setState({ mode: 'Reviewing' });
+        this.setState({ activePage: 1 });
       }
       else {}
     },
-
-    handleOpen: () => this.setState({ modalOpen: true }),
+    //modal: remove answers
+    handleOpenDeleteAnswers: () => this.setState({ modalOpen: true }),
 
     handleOpenResults: () => {
-      this.state.showResults();
+      this.showResults();
 
       this.setState({ modalOpenResults: true });
     },
 
-    //clear and results methods
 
     //pagination
     handlePaginationChange: (e, { activePage }) =>
       this.setState({ activePage }),
 
-    //select level
+    //selecting level
     handleSelectLevel: e => this.setState({ mode: 'Testing' }),
+    
 
+    //adding new properties to selected question
     handleChooseLevel: (e, { level }) =>
       this.setState({ level, buttonPressable: true }, () => {
         this.setState(
@@ -88,6 +94,7 @@ export class Provider extends Component {
         );
       }),
 
+    //mark the answer and move to another question after the delay
     markAnswer: e => {
       //console.log(e.target.value)
       const ticked = [...this.state.questionsReady];
@@ -96,10 +103,11 @@ export class Provider extends Component {
       this.setState({ questionsReady: ticked }, () => { if (this.state.activePage>=this.state.questionsReady.length) {} else {
         setTimeout(() => {
           this.setState({ activePage: this.state.activePage + 1 });
-        }, 1200);
+        }, 1000);
       }});
     },
 
+    // go to the first unanswered question
     showMissing: () => {
 
       console.log("Missing")
@@ -108,7 +116,7 @@ export class Provider extends Component {
     
 
       for (var i = 0; i < length; i++) {
-        //console.log(Object.keys(this.state.questionsReady[i]));
+     
 
         if (this.state.questionsReady[i]["Ticked"] === "") {
  
@@ -120,56 +128,48 @@ export class Provider extends Component {
       
     },
 
-    showResults: () => {
-      var length = this.state.questionsReady.length;
-      var rightAnswers = 0;
-
-      for (var i = 0; i < length; i++) {
-        //console.log(Object.keys(this.state.questionsReady[i]));
-
-        if (this.state.questionsReady[i]["Ticked"] === "r0") {
-          rightAnswers = rightAnswers + 1;
-        }
-      }
-
-      //console.log(rightAnswers);
-      this.setState({ results: rightAnswers }, () =>
-        console.log(this.state.results)
-      );
-    },
-
+ 
     removeAnswers: e => {
       console.log("Removing asnwers");
     }
   };
 
+////////////////////// End of State //////////////////////
+
+
+  showResults  = () => {
+    var length = this.state.questionsReady.length;
+    var rightAnswers = 0;
+
+    for (var i = 0; i < length; i++) {
+  
+
+      if (this.state.questionsReady[i]["Ticked"] === "r0") {
+        rightAnswers = rightAnswers + 1;
+      }
+    }
+
+ 
+    this.setState({ results: rightAnswers }, () =>
+      console.log(this.state.results)
+    );
+  }
+
   baseState = this.state;
+
+  //reset State and leave questions loaded via session storage
 
   resetForm = () => {
     var temp = sessionStorage.getItem("Questions");
     var q = JSON.parse(temp);
     console.log(this.baseState);
-    //console.log(viewName);
+
 
     this.setState(this.baseState);
 
     this.setState({ questions: q });
   };
-  resetAnswers = () => {
-    {
-      /* 
 
-  resetForm = (baseState)=> {
-    console.log("Pytania do wczytania: "+this.questions);
-    console.log("Stan bazowy: "+this.questions);
-    var temp = sessionStorage.getItem('Questions');
-    var q = JSON.parse(temp);
-
-    this.setState({baseState}, ()=>this.setState({questions:q}));
-  };
-*/
-    }
-  };
 
   filterbyLevel = question => {
     return question["Level"] === this.state.level;
@@ -212,7 +212,7 @@ export class Provider extends Component {
       .get("https://my-json-server.typicode.com/lukaszbrk/demo/db")
       .then(res => {
         this.setState({ questions: res.data.pytania });
-        //this.setState({ questions: res.data.pytania });
+ 
       })
       .catch(err => console.log(err));
   }

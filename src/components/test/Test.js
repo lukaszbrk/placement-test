@@ -6,7 +6,7 @@ import { Button, Grid, Modal, Icon, Header } from "semantic-ui-react";
 import { Consumer } from "../../context";
 import { Form, Radio } from "semantic-ui-react";
 
-const StartTest = () => (
+const SelectingPanel = () => (
   <div>
     <h1>Start Test</h1>
     <SelectLevel />
@@ -66,7 +66,7 @@ const Test = () => (
       {value => {
         switch (value.mode) {
           case "selectingLevel":
-            return <StartTest />;
+            return <SelectingPanel />;
 
           case "Testing":
             return (
@@ -103,8 +103,7 @@ const Test = () => (
                           </h3>
                         </Modal.Content>
                         <Modal.Actions>
-
-                        <Button
+                          <Button
                             color="yellow"
                             onClick={value.handleCloseResults}
                             inverted
@@ -112,7 +111,7 @@ const Test = () => (
                           >
                             <Icon name="checkmark" /> Przegląd testu
                           </Button>
-                          
+
                           <Button
                             color="red"
                             onClick={value.handleCloseResults}
@@ -133,14 +132,10 @@ const Test = () => (
                     </Grid.Column>
 
                     <Grid.Column>
-                      {/*
-                <Button onClick={value.showScreen} id="clear">
-                  Wyczyść
-                </Button>
-               */}
+           
                       <Modal
                         trigger={
-                          <Button onClick={value.handleOpen}>
+                          <Button onClick={value.handleOpenDeleteAnswers}>
                             Usuń odpowiedzi
                           </Button>
                         }
@@ -179,19 +174,27 @@ const Test = () => (
             );
 
           case "Reviewing":
-            return <div><p>reviewing</p>
-            
-            <Question
-            question={value.questionsReady[value.activePage - 1]}
-            markAnswer={value.markAnswer}
-            mode={value.mode}
-          />
-          <Grid.Column>
-                      <Navigation />
-                    </Grid.Column>
-          </div>
+            return (
+              <div>
+                <p>reviewing</p>
 
-            
+                <Question
+                  question={value.questionsReady[value.activePage - 1]}
+                  markAnswer={value.markAnswer}
+                  mode={value.mode}
+                />
+                <Grid.Column>
+                  <Navigation />
+                  <Button
+                    color="green"
+                    onClick={value.handleCloseResults}
+                    value="NewTest"
+                  >
+                    Nowy test
+                  </Button>
+                </Grid.Column>
+              </div>
+            );
 
           // do something
 

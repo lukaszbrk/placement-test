@@ -2,11 +2,12 @@ import React from "react";
 import { Divider, Header, Segment } from "semantic-ui-react";
 import { Checkbox } from "semantic-ui-react";
 
-//styling
+//styling for marking the correct answers
 const styleforReview = { border: "3px solid green", padding: "5px" };
 
 const Question = ({ question, markAnswer, mode }) => (
-  <Segment>
+<div>
+ 
     <Header as="h2">Pytanie</Header>
 
     <h1>{question.Text}</h1>
@@ -20,7 +21,7 @@ const Question = ({ question, markAnswer, mode }) => (
       {question["Shuffled_keys"].map(item => (
         <span key={question["All_with_keys"][item]}>
           <Checkbox
-            style={mode === "Reviewing" && item === "r0" ? styleforReview : {}} //
+            style={mode === "Reviewing" && item === "r0" ? styleforReview : {}} //mode: reviewing and r0 - correct answer
             id={item}
             radio
             label={question["All_with_keys"][item]}
@@ -35,7 +36,7 @@ const Question = ({ question, markAnswer, mode }) => (
         </span>
       ))}
     </Segment>
-  </Segment>
+    </div>
 );
 
 export default Question;

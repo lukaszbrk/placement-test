@@ -1,0 +1,81 @@
+{
+  "pytania": [
+    {
+      "Text": "The alternative dispute resolution emerged because:",
+
+      "Answers": {
+        "correct": "All answers are correct",
+        "incorrect": ["some cases are resolved by less complicated procedures", "the ordinary process can be too formal"]
+      }
+    },
+    {
+      "Text": "Businesses in the UK resolve their dipsutes by arbitration rather than procedures provided for by contract law.",
+
+      "Answers": {
+        "correct": "TRUE",
+        "incorrect": ["FALSE"]
+      }
+    },
+    {
+      "Text": "The arbitrator is NOT",
+
+      "Answers": {
+        "correct": "bound by rules of natural justice",
+        "incorrect": ["an expert in the given field", "authorised to investigate the case"]
+      }
+    },
+    {
+      "Text": "You can always appeal the award of the arbitration.",
+
+      "Answers": {
+        "correct": "FALSE",
+        "incorrect": [
+          "TRUE"
+        ]
+      }
+    },
+    {
+      "Text": "Which court can review arbitration awards?",
+
+      "Answers": {
+        "correct": "High Court",
+        "incorrect": ["Court of Appeal", "none of the two"]
+      }
+    },
+
+    {
+      "Text": "The arbitration is always cheaper than court procedures.",
+
+      "Answers": {
+        "correct": "FALSE",
+        "incorrect": ["TRUE"]
+      }
+    },
+    {
+        "Text": "What are the advantages of the arbitation?",
+  
+        "Answers": {
+          "correct": "All answers are correct",
+          "incorrect": ["Speed of resolution", "Privacy", "Reduced costs"]
+        }
+      },
+
+      {
+        "Text": "Who usually benefits more from the arbitration?",
+  
+        "Answers": {
+          "correct": "Employer",
+          "incorrect": ["Employees"]
+        }
+      },
+
+      {
+        "Text": "The arbitration award can serve as an authorative rule on future similar arbitrations",
+  
+        "Answers": {
+          "correct": "FALSE",
+          "incorrect": ["TRUE"]
+        }
+      }
+  ]
+}

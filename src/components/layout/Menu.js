@@ -2,17 +2,12 @@ import React, { Component } from "react";
 import { Menu } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import {Provider} from '../../context';
+import { Provider } from "../../context";
 
 import { BrowserRouter } from "react-router-dom";
 
-
-
-
 import Test from "../test/Test";
 import Description from "../Description";
-import Other from "../Other";
-
 
 export default class MainMenu extends Component {
   state = { activeItem: "" };
@@ -24,40 +19,32 @@ export default class MainMenu extends Component {
 
     return (
       <Provider>
-      <BrowserRouter>
-        <Router>
-        <React.Fragment>
-          <Menu tabular>
-            <Menu.Item
-              name="Opis testu"
-              active={activeItem === "Description"}
-              onClick={this.handleItemClick}
-              as={NavLink} exact to="/"
-              
-            />
-            <Menu.Item
-              name="Test"
-              active={activeItem === "Test"}
-              onClick={this.handleItemClick}
-              as={NavLink}  to="/test"
-            />
-            <Menu.Item
-              name="Inne"
-              active={activeItem === "Other"}
-              onClick={this.handleItemClick}
-              as={NavLink}  to="/other"
-            />
-          </Menu>
+        <BrowserRouter>
+          <Router>
+            <React.Fragment>
+              <Menu tabular>
+                <Menu.Item
+                  name="Tekst"
+                  active={activeItem === "Tekst"}
+                  onClick={this.handleItemClick}
+                  as={NavLink}
+                  exact
+                  to="/"
+                />
+                <Menu.Item
+                  name="Test"
+                  active={activeItem === "Test"}
+                  onClick={this.handleItemClick}
+                  as={NavLink}
+                  to="/test"
+                />
+              </Menu>
 
-          
-
-            <Route exact path="/" component={Description} />
-            <Route  path="/test" component={Test} />
-            
-            <Route path="/other" component={Other} />
+              <Route exact path="/" render={() => <Description />} />
+              <Route path="/test" component={Test} />
             </React.Fragment>
-        </Router>
-      </BrowserRouter>
+          </Router>
+        </BrowserRouter>
       </Provider>
     );
   }

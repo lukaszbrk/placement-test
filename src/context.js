@@ -5,27 +5,34 @@ const Context = React.createContext();
 
 export class Provider extends Component {
   state = {
+    //for pagination
     activePage: 1,
+    activeItem:'',
+    handleItemClick : (e, { name }) => this.setState({ activeItem: name }),
+
+    //gotoQuestion: e => {console.log("kliked and "+e.target.id )},
+    gotoQuestion: e => {
+      const id = parseInt(e.target.id);
+      this.setState({ activePage: id });
+    },
 
     //questions
-    questions: [],
-    questionsSelected: [],
-    questionsReady: [],
+    questions: [], //retrieved
+    questionsSelected: [], //selected
+    questionsReady: [], //after adding new properies
 
     results: "",
 
-    level: "",
-    levelSelected: false,
     //buttons
-    buttonPressed: false,
-    buttonPressable: false,
-    mode:'selectingLevel',
+
+    mode: "Testing", //default mode; other: 'Testing' and 'Reviewing'
 
     //modal handling
     modalOpen: false,
 
     modalOpenResults: false,
 
+    //  remove answers only (todo)
     handleClose: e => {
       this.setState({ modalOpen: false });
 
@@ -36,106 +43,66 @@ export class Provider extends Component {
         console.log("Nie usuwaj wyników");
       }
     },
-
+    // modals for the new test and reviewing
     handleCloseResults: e => {
       this.setState({ modalOpenResults: false });
 
       if (e.target.value === "NewTest") {
         console.log("Nowy Test");
         this.resetForm();
-      } else if (e.target.value === "Review"){
-        
-        this.setState({ mode: 'Reviewing' });
+      } else if (e.target.value === "Review") {
+        this.setState({ mode: "Reviewing" });
+        this.setState({ activePage: 1 });
+      } else {
       }
-      else {}
     },
-
-    handleOpen: () => this.setState({ modalOpen: true }),
+    //modal: remove answers
+    handleOpenDeleteAnswers: () => this.setState({ modalOpen: true }),
 
     handleOpenResults: () => {
-      this.state.showResults();
+      this.showResults();
 
       this.setState({ modalOpenResults: true });
     },
-
-    //clear and results methods
 
     //pagination
     handlePaginationChange: (e, { activePage }) =>
       this.setState({ activePage }),
 
-    //select level
-    handleSelectLevel: e => this.setState({ mode: 'Testing' }),
+    handleItemClick: (e, { name }) => this.setState({ activeItem: name }),
 
-    handleChooseLevel: (e, { level }) =>
-      this.setState({ level, buttonPressable: true }, () => {
-        this.setState(
-          {
-            questionsSelected: [...this.state.questions].filter(
-              this.filterbyLevel //filter by level
-            )
-          },
-          () => {
-            this.setState(
-              {
-                questionsReady: this.prepareQuestion(
-                  //
-                  this.state.questionsSelected
-                )
-              } /*()=> console.log(this.state.questionsReady[0]['All_with_keys']['r0'])*/
-            );
-          }
-        );
-      }),
+    //adding new properties to selected question
 
+    //mark the answer and move to another question after the delay
     markAnswer: e => {
       //console.log(e.target.value)
       const ticked = [...this.state.questionsReady];
       ticked[this.state.activePage - 1]["Ticked"] = e.target.value;
+
       //delay after answering
-      this.setState({ questionsReady: ticked }, () => { if (this.state.activePage>=this.state.questionsReady.length) {} else {
-        setTimeout(() => {
-          this.setState({ activePage: this.state.activePage + 1 });
-        }, 1200);
-      }});
+      const ap = this.state.activePage + 1;
+      this.setState({ questionsReady: ticked }, () => {
+        if (this.state.activePage >= this.state.questionsReady.length) {
+        } else {
+          setTimeout(() => {
+            this.setState({ activePage: ap });
+          }, 1000);
+        }
+      });
     },
 
+    // go to the first unanswered question
     showMissing: () => {
+      console.log("Missing");
 
-      console.log("Missing")
-
-       var length = this.state.questionsReady.length;
-    
+      var length = this.state.questionsReady.length;
 
       for (var i = 0; i < length; i++) {
-        //console.log(Object.keys(this.state.questionsReady[i]));
-
         if (this.state.questionsReady[i]["Ticked"] === "") {
- 
-          this.setState({ activePage: i+1 });
+          this.setState({ activePage: i + 1 });
           break;
         }
       }
-
-      
-    },
-
-    showResults: () => {
-      var length = this.state.questionsReady.length;
-      var rightAnswers = 0;
-
-      for (var i = 0; i < length; i++) {
-        //console.log(Object.keys(this.state.questionsReady[i]));
-
-        if (this.state.questionsReady[i]["Ticked"] === "r0") {
-          rightAnswers = rightAnswers + 1;
-        }
-      }
-
-      //console.log(rightAnswers);
-      this.setState({ results: rightAnswers }, () =>
-        console.log(this.state.results)
-      );
     },
 
     removeAnswers: e => {
@@ -143,36 +110,42 @@ export class Provider extends Component {
     }
   };
 
+  ////////////////////// End of State //////////////////////
+
+  showResults = () => {
+    var length = this.state.questionsReady.length;
+    var rightAnswers = 0;
+
+    for (var i = 0; i < length; i++) {
+      if (this.state.questionsReady[i]["Ticked"] === "r0") {
+        rightAnswers = rightAnswers + 1;
+      }
+    }
+
+    this.setState({ results: rightAnswers }, () =>
+      console.log(this.state.results)
+    );
+  };
+
   baseState = this.state;
+
+  //reset State and leave questions loaded via session storage
 
   resetForm = () => {
     var temp = sessionStorage.getItem("Questions");
     var q = JSON.parse(temp);
     console.log(this.baseState);
-    //console.log(viewName);
 
-    this.setState(this.baseState);
-
-    this.setState({ questions: q });
-  };
-  resetAnswers = () => {
-    {
-      /* 
-
-  resetForm = (baseState)=> {
-    console.log("Pytania do wczytania: "+this.questions);
-    console.log("Stan bazowy: "+this.questions);
-    var temp = sessionStorage.getItem('Questions');
-    var q = JSON.parse(temp);
-
-    this.setState({baseState}, ()=>this.setState({questions:q}));
-  };
-*/
-    }
-  };
-
-  filterbyLevel = question => {
-    return question["Level"] === this.state.level;
+    this.setState({ questions: q }, () => {
+      this.setState(
+        { questionsReady: this.prepareQuestion(this.state.questions) },
+        () => {
+          this.setState({ mode: "Testing" }, () => {
+            this.setState({ activePage: 1 });
+          });
+        }
+      );
+    });
   };
 
   prepareQuestion = questions => {
@@ -209,10 +182,15 @@ export class Provider extends Component {
 
   componentWillMount() {
     axios
-      .get("https://my-json-server.typicode.com/lukaszbrk/demo/db")
+      .get("https://my-json-server.typicode.com/lukaszbrk/demo2/db")
       .then(res => {
-        this.setState({ questions: res.data.pytania });
-        //this.setState({ questions: res.data.pytania });
+        this.setState({ questions: res.data.pytania }, () => {
+          this.setState(
+            {
+              questionsReady: this.prepareQuestion(this.state.questions)
+            } /*()=> console.log(this.state.questionsReady[0]['All_with_keys']['r0'])*/
+          );
+        });
       })
       .catch(err => console.log(err));
   }

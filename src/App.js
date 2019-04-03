@@ -11,7 +11,7 @@ class App extends Component {
         <span>&nbsp;</span>
       <div className="App">
      
-        <Header>Kształcenie Tłumaczy Przysięgłych Języka Angielskiego - zaliczenie</Header>
+        <Header>Kształcenie Tłumaczy Przysięgłych Języka Angielskiego: Terminologia i tłumaczenia prawnicze</Header>
         <Menu />
       </div>
       </Container>

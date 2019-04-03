@@ -7,8 +7,7 @@ export class Provider extends Component {
   state = {
     //for pagination
     activePage: 1,
-    activeItem:'',
-    handleItemClick : (e, { name }) => this.setState({ activeItem: name }),
+
 
     //gotoQuestion: e => {console.log("kliked and "+e.target.id )},
     gotoQuestion: e => {
@@ -69,7 +68,7 @@ export class Provider extends Component {
     handlePaginationChange: (e, { activePage }) =>
       this.setState({ activePage }),
 
-    handleItemClick: (e, { name }) => this.setState({ activeItem: name }),
+   
 
     //adding new properties to selected question
 

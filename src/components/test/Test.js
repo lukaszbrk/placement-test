@@ -14,7 +14,7 @@ import {
 import { Consumer } from "../../context";
 
 const Test = () => (
-  <div>
+  
     <Consumer>
       {value => {
         switch (value.mode) {
@@ -32,11 +32,11 @@ const Test = () => (
                 />
               
                   <Grid divided="vertically">
-                    <Grid.Row columns="equal" align="right">
-                      <Grid.Column>
+                    <Grid.Row columns="equal" >
+                      <Grid.Column align="left">
                         <Navigation />
                       </Grid.Column>
-                      <Grid.Column>
+                      <Grid.Column align="right">
                         <Button onClick={value.showMissing}>Brakujące</Button>
 
                         <Modal
@@ -59,7 +59,7 @@ const Test = () => (
                           </Modal.Content>
                           <Modal.Actions>
                             <Button
-                              color="yellow"
+                              color="green"
                               onClick={value.handleCloseResults}
                               inverted
                               value="Review"
@@ -106,11 +106,11 @@ const Test = () => (
                   />
 
                   <Grid divided="vertically">
-                    <Grid.Row columns="equal" align="right">
-                      <Grid.Column>
+                    <Grid.Row columns="equal" align="left">
+                      <Grid.Column align="left">
                         <Navigation />
                       </Grid.Column>
-                      <Grid.Column>
+                      <Grid.Column align="right">
                         <Button
                           color="green"
                           onClick={value.handleCloseResults}
@@ -129,7 +129,7 @@ const Test = () => (
         }
       }}
     </Consumer>
-  </div>
+ 
 );
 
 export default Test;

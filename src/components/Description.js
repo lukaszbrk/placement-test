@@ -277,6 +277,10 @@ const Description = () => (
           <p>
             <span><b>Bibliography</b></span>
           </p>
+          <ul>
+            <li>Slapper, Gary, and David Kelly. The English Legal System. Routledge, 2017.</li>
+            <li>Elliot, Catherine, and Frances Quinn. English Legal System. Longman, 2010.</li>
+          </ul>
         </React.Fragment>
       )}
     </Consumer>

@@ -11,8 +11,12 @@ export class Provider extends Component {
 
 
     gotoQuestion: e => {
-      const id = parseInt(e.target.id);
-      this.setState({ activePage: id });
+      
+      const n= parseInt( e.target.id);
+      
+      console.log("Clicked on: " +n)
+      this.setState({ activePage: n }, ()=>{console.log("activePage is: " + this.state.activePage)});
+      
     },
 
     //questions

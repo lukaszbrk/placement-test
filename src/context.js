@@ -9,7 +9,7 @@ export class Provider extends Component {
     activePage: 1,
 
 
-    //gotoQuestion: e => {console.log("kliked and "+e.target.id )},
+
     gotoQuestion: e => {
       const id = parseInt(e.target.id);
       this.setState({ activePage: id });
@@ -22,7 +22,7 @@ export class Provider extends Component {
 
     results: "",
 
-    //buttons
+
 
     mode: "Testing", //default mode; other: 'Testing' and 'Reviewing'
 

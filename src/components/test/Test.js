@@ -8,9 +8,10 @@ import {
   Modal,
   Icon,
   Header,
-  Container,
 
-} from "semantic-ui-react";
+
+} from "semantic-ui-react"; 
+
 import { Consumer } from "../../context";
 
 const Test = () => (

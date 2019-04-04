@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Menu from './components/layout/Menu';
-import { Divider, Header, Segment, Container } from "semantic-ui-react";
+
+import { Header, Container } from "semantic-ui-react";
 
 import './App.css';
 

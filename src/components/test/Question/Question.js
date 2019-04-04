@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider, Header, Segment, Container } from "semantic-ui-react";
+import { Divider, Header, Segment } from "semantic-ui-react";
 import { Checkbox } from "semantic-ui-react";
 
 //styling for marking the correct answers

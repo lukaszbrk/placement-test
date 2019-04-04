@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Consumer } from "../context";
 
-import { Label, Container, Icon } from "semantic-ui-react";
+import { Label, Icon } from "semantic-ui-react";
 
 const Description = () => (
 
@@ -52,7 +52,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon link name=" question circle outline" />
+                <Icon name='question circle' />
                 Q1
               </Label>
               .
@@ -80,11 +80,11 @@ const Description = () => (
               <Label
                 as={Link}
                 to="/test"
-                id={2}
+                id='2'
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle' />
                 Q2
               </Label>
               .This practice is well established and its legal effectiveness has
@@ -131,7 +131,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle' />
                 Q3
               </Label>
               . The arbitrator’s decision, known as the award, is often
@@ -149,7 +149,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle' />
                 Q4
               </Label>
               <Label
@@ -159,7 +159,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle'/>
                 Q5
               </Label>
               .
@@ -194,7 +194,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle' />
                 Q6
               </Label>
               The dispute may also be resolved quicker by the fact that those
@@ -211,7 +211,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle' />
                 Q7
               </Label>
               .
@@ -243,7 +243,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle'/>
                 Q8
               </Label>
               . Relying on arbitration may also often mean removing the case
@@ -263,7 +263,7 @@ const Description = () => (
                 size="mini"
                 onClick={value.gotoQuestion}
               >
-                <Icon name=" question circle outline" />
+                <Icon name='question circle'/>
                 Q9
               </Label>{" "}
            

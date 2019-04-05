@@ -8,6 +8,7 @@ import {
   Modal,
   Icon,
   Header,
+  Popup
 
 
 } from "semantic-ui-react"; 
@@ -38,7 +39,7 @@ const Test = () => (
                         <Navigation />
                       </Grid.Column>
                       <Grid.Column align="right">
-                        <Button onClick={value.showMissing}>Brakujące</Button>
+                      <Popup trigger={<Button onClick={value.showMissing}>Brakujące</Button>} content='Przejdź do pytania bez odpowiedzi' />
 
                         <Modal
                           trigger={
@@ -97,7 +98,7 @@ const Test = () => (
               <div>
            
                   <p align="center" style={{ color: "green" }}>
-                    <b />Sprawdzanie wyników
+                    <b />Sprawdzanie odpowiedzi
                   </p>
 
                   <Question

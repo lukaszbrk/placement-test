@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Consumer } from "../context";
 
-import { Label} from "semantic-ui-react";
+import { Label, Popup} from "semantic-ui-react";
 
 const Description = () => (
 
@@ -45,16 +45,17 @@ const Description = () => (
               is arbitration. This is the procedure whereby parties in dispute
               refer the issue to a third party for resolution, rather than
               taking the case to the ordinary law courts{" "}
-              <Label
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={1}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q1
-              </Label>
+              </Label>} content= "Przejdź do Pytania 1"/>
               .
             </span>
           </p>
@@ -77,16 +78,17 @@ const Description = () => (
               contemporary business practice, it is common, if not standard,
               practice for commercial contracts to contain express clauses
               referring any future disputes to arbitration{" "}
-              <Label
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={2}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q2
-              </Label>
+              </Label>} content= "Przejdź do Pytania 2"/>
               .This practice is well established and its legal effectiveness has
               long been recognised by the law. Arbitration’s advantage is speed,
               cost, and informal procedures that respect mutuality and
@@ -124,16 +126,17 @@ const Description = () => (
               conducted in a judicial manner, in accordance with the rules of
               natural justice, but proceedings are held in private, with the
               time and place decided by the parties
-              <Label
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={3}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q3
-              </Label>
+              </Label>} content= "Przejdź do Pytania 3"/>
               . The arbitrator’s decision, known as the award, is often
               delivered immediately, and is as binding on the parties as a High
               Court judgment would be, and if necessary can be enforced as one.
@@ -142,27 +145,29 @@ const Description = () => (
               all the parties, or with the permission of the court. The High
               Court may confirm, vary or reverse the award, or send it back to
               the arbitrator for reconsideration
-              <Label
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={4}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q4
-              </Label>
-              <Label
+              </Label>} content= "Przejdź do Pytania 4"/>
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={5}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q5
-              </Label>
-              .
+              </Label>} content= "Przejdź do Pytania 5"/>.
+              
             </span>
           </p>
 
@@ -187,16 +192,17 @@ const Description = () => (
               may be outweighed by the money they save through being able to get
               the problem solved as soon as it arises, rather than having to
               wait months for a court hearing.{" "}
-              <Label
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={6}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q6
-              </Label>
+              </Label>} content= "Przejdź do Pytania 6"/>.
               The dispute may also be resolved quicker by the fact that those
               who run alternative dispute resolution schemes often have
               specialist knowledge. Other important advantages is privacy;
@@ -204,16 +210,17 @@ const Description = () => (
               are not made known to competitors. Finally, the arbitration avoid
               irrevocably dividing the parties, so allows business relationships
               to be maintained
-              <Label
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={7}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q7
-              </Label>
+              </Label>} content= "Przejdź do Pytania 8"/>
               .
             </span>
           </p>
@@ -236,7 +243,7 @@ const Description = () => (
               other, e.g. mandatory arbitration clauses in consumer contracts
               and employment contracts often work in favor of the company rather
               than the employee or consumer{" "}
-              <Label
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={8}
@@ -246,7 +253,7 @@ const Description = () => (
               >
                 
                 Q8
-              </Label>
+              </Label>} content= "Przejdź do Pytania 8"/>
               . Relying on arbitration may also often mean removing the case
               from the state sector into the private sector where the priority
               is normally profit not justice: arbitrators may not have the
@@ -256,17 +263,18 @@ const Description = () => (
               may not use their skills and knowledge since its simplified
               procedure does not include a formal evidence process,
               interrogatories, depositions, discovery process, and doctrine of
-              precedent.{" "}
-              <Label
+              precedent{" "}
+              <Popup trigger={ <Label
                 as={Link}
                 to="/test"
                 id={9}
                 size="mini"
                 onClick={value.gotoQuestion}
+                
               >
                 
                 Q9
-              </Label>{" "}
+              </Label>} content= "Przejdź do Pytania 9"/>.
            
             </span>
           </p>

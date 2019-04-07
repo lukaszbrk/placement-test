@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import Question from "./Question/Question";
 import Navigation from "./Navigation";
 import {
@@ -71,9 +71,16 @@ const Test = () => (
 
                             <Button
                               color="red"
-                              onClick={value.handleCloseResults}
+                              onClick= {
+                                value.handleCloseResults
+                                //this.forceUpdate();
+                              
+                             }
                               inverted
                               value="NewTest"
+                              as={Link}
+                              to="/"
+                     
                             >
                               <Icon name="checkmark" /> Nowy test
                             </Button>
@@ -97,9 +104,7 @@ const Test = () => (
             return (
               <div>
            
-                  <p align="center" style={{ color: "green" }}>
-                    <b />Sprawdzanie odpowiedzi
-                  </p>
+                 
 
                   <Question
                     question={value.questionsReady[value.activePage - 1]}
@@ -114,7 +119,10 @@ const Test = () => (
                       </Grid.Column>
                       <Grid.Column align="right">
                         <Button
-                          color="green"
+
+                          as={Link}
+                          to="/"
+                          color="red"
                           onClick={value.handleCloseResults}
                           value="NewTest"
                         >
@@ -123,6 +131,10 @@ const Test = () => (
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
+
+                  <h2 align="center" style={{ color: "green" }}>
+                    <b />Sprawdzanie odpowiedzi
+                  </h2>
          
               </div>
             );

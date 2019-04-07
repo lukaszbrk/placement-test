@@ -8,8 +8,12 @@ export class Provider extends Component {
     //for pagination
     activePage: 1,
 
+    //Selecting Test
+    selectedTestYesNo: 'no',
+    selectedTest: '', //test1, ...2, ...3
+    selectingTest: (e, { test_no }) => this.setState({ selectedTest: test_no }, ()=>{this.setState({ selectedTestYesNo: 'yes' },()=>{this.loadQuestions()})}),
 
-
+    //linking to the test from the TextPage
     gotoQuestion: e => {
       
       const n= parseInt( e.target.id);
@@ -22,8 +26,8 @@ export class Provider extends Component {
     //questions
     questions: [], //retrieved
     questionsSelected: [], //selected
-    questionsReady: [], //after adding new properies
-
+    questionsReady: [], //after adding new properties
+    //no. of correct answers
     results: "",
 
 
@@ -47,11 +51,12 @@ export class Provider extends Component {
       }
     },
     // modals for the new test and reviewing
-    handleCloseResults: e => {
+    handleCloseResults: (e, {color}) => {
+      console.log(color);
       this.setState({ modalOpenResults: false });
 
-      if (e.target.value === "NewTest") {
-        console.log("Nowy Test");
+      if (color === "red") {
+    
         this.resetForm();
       } else if (e.target.value === "Review") {
         this.setState({ mode: "Reviewing" });
@@ -114,7 +119,7 @@ export class Provider extends Component {
   };
 
   ////////////////////// End of State //////////////////////
-
+  
   showResults = () => {
     var length = this.state.questionsReady.length;
     var rightAnswers = 0;
@@ -125,31 +130,21 @@ export class Provider extends Component {
       }
     }
 
-    this.setState({ results: rightAnswers }, () =>
-      console.log(this.state.results)
+    this.setState({ results: rightAnswers }
     );
   };
 
-  baseState = this.state;
+ 
 
   //reset State and leave questions loaded via session storage
 
   resetForm = () => {
-    var temp = sessionStorage.getItem("Questions");
-    var q = JSON.parse(temp);
-    console.log(this.baseState);
-
-    this.setState({ questions: q }, () => {
-      this.setState(
-        { questionsReady: this.prepareQuestion(this.state.questions) },
-        () => {
+  
           this.setState({ mode: "Testing" }, () => {
-            this.setState({ activePage: 1 });
+            this.setState({ activePage: 1 }, ()=>{this.setState({selectedTestYesNo: 'no'}, ()=>{this.setState({selectedTest:''})})});
           });
         }
-      );
-    });
-  };
+  
 
   prepareQuestion = questions => {
     var rtr = questions.map(question => {
@@ -183,24 +178,51 @@ export class Provider extends Component {
     return rtr;
   };
 
+  loadQuestions = () => {
+
+    //const s = 'pytania'.concat(this.state.selectedTest)
+    
+    //edit json to point to keys
+    axios
+    .get("https://my-json-server.typicode.com/lukaszbrk/demo2/db")
+    .then(res => {
+      this.setState({ questions: res.data[this.state.selectedTest] }, () => {
+        this.setState(
+          {
+            questionsReady: this.prepareQuestion(this.state.questions)
+          } /*()=> console.log(this.state.questionsReady[0]['All_with_keys']['r0'])*/
+        );
+      });
+    })
+    .catch(err => console.log(err));
+}
+
+
+
+
+/*
+
   componentWillMount() {
     axios
       .get("https://my-json-server.typicode.com/lukaszbrk/demo2/db")
       .then(res => {
-        this.setState({ questions: res.data.pytania }, () => {
+        this.setState({ questions: res.data.pytania2 }, () => {
           this.setState(
             {
               questionsReady: this.prepareQuestion(this.state.questions)
-            } /*()=> console.log(this.state.questionsReady[0]['All_with_keys']['r0'])*/
-          );
-        });
-      })
-      .catch(err => console.log(err));
-  }
+            } 
+            );
+          });
+        })
+        .catch(err => console.log(err));
+    }
+  
 
   componentDidUpdate() {
     sessionStorage.setItem("Questions", JSON.stringify(this.state.questions));
   }
+
+  */
   render() {
     return (
       <Context.Provider value={this.state}>

@@ -7,7 +7,7 @@ import { Provider } from "../../context";
 import { BrowserRouter } from "react-router-dom";
 
 import Test from "../test/Test";
-import Description from "../Description";
+import Texts from "../texts/Texts";
 
 export default class MainMenu extends Component {
   state = { activeItem: "" };
@@ -40,7 +40,7 @@ export default class MainMenu extends Component {
                 />
               </Menu>
 
-              <Route exact path="/" render={() => <Description />} />
+              <Route exact path="/" render={() => <Texts />} />
               <Route path="/test" component={Test} />
             </React.Fragment>
           </Router>

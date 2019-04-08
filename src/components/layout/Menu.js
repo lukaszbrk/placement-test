@@ -40,7 +40,7 @@ export default class MainMenu extends Component {
                 />
               </Menu>
 
-              <Route exact path="/" render={() => <Texts />} />
+              <Route exact path="/" component={Texts} />
               <Route path="/test" component={Test} />
             </React.Fragment>
           </Router>

@@ -123,6 +123,7 @@ const Test = () => (
                           as={Link}
                           to="/"
                           color="red"
+                          inverted
                           onClick={value.handleCloseResults}
                           value="NewTest"
                         >

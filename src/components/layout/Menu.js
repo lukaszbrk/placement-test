@@ -43,7 +43,7 @@ export default class MainMenu extends Component {
                   active={value.activeItem === "Test"}
                   onClick={value.handleItemClick}
                   as={NavLink}
-                  to="/test"
+                  to={value.disabledMenuItem_Test ? '#'  : '/test'}
           
                 />
       

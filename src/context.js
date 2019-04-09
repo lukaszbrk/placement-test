@@ -13,8 +13,8 @@ export class Provider extends Component {
     handleItemClick: (e, { name }) => this.setState({ activeItem: name }),
 
     disabledMenuItem_Test: true,
-    activeMenuItem_Test: "false",
-    activeMenuItem_Text: "true",
+
+
 
     //for pagination
     activePage: 1,
@@ -35,7 +35,8 @@ export class Provider extends Component {
 
       console.log("Clicked on: " + n);
       this.setState({ activePage: n }, () => {
-        console.log("activePage is: " + this.state.activePage);
+        this.setState({activeItem: 'Test'})
+      
       });
     },
 
@@ -75,6 +76,8 @@ export class Provider extends Component {
         this.setState({ mode: "Reviewing" });
         this.setState({ activePage: 1 });
       } else {
+
+        
       }
     },
     //modal: remove answers

@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Menu from './components/layout/Menu';
 
 import { Header, Container } from "semantic-ui-react";
+import { Provider } from "./context";
 
 import './App.css';
 
 class App extends Component {
   render() {
     return (
+      <Provider>
       <Container>
         <span>&nbsp;</span>
       <div className="App">
@@ -16,6 +18,7 @@ class App extends Component {
         <Menu />
       </div>
       </Container>
+      </Provider>
     );
   }
 }

@@ -119,11 +119,7 @@ const Test = () => (
                       </Grid.Column>
                       <Grid.Column align="right">
                         <Button
-
-                          as={Link}
-                          to="/"
-                          color="red"
-                          inverted
+                          color="green"
                           onClick={value.handleCloseResults}
                           value="NewTest"
                         >

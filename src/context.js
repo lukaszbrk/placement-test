@@ -4,23 +4,39 @@ import { shuffle } from "./tools.js";
 const Context = React.createContext();
 
 export class Provider extends Component {
-  state = {
+  constructor(props){
+    super(props)
+  this.state = {
+    //main menu
+
+    activeItem: "Tekst",
+    handleItemClick: (e, { name }) => this.setState({ activeItem: name }),
+
+    disabledMenuItem_Test: true,
+    activeMenuItem_Test: "false",
+    activeMenuItem_Text: "true",
+
     //for pagination
     activePage: 1,
 
     //Selecting Test
-    selectedTestYesNo: 'no',
-    selectedTest: '', //test1, ...2, ...3
-    selectingTest: (e, { test_no }) => this.setState({ selectedTest: test_no }, ()=>{this.setState({ selectedTestYesNo: 'yes' },()=>{this.loadQuestions()})}),
+    selectedTestYesNo: "no",
+    selectedTest: "", //test1, ...2, ...3
+    //selectingTest: (e, { test_no }) => this.setState({ selectedTest: test_no }, ()=>{this.setState({ selectedTestYesNo: 'yes' },()=>{this.loadQuestions()})}),
+    // prettier-ignore
+    selectingTest: (e, { test_no }) => this.setState({ selectedTest: test_no },
+      ()=>{this.setState({disabledMenuItem_Test: false},
+      ()=>{this.setState({ selectedTestYesNo: 'yes' },
+      ()=>{this.loadQuestions()})})}),
 
     //linking to the test from the TextPage
     gotoQuestion: e => {
-      
-      const n= parseInt( e.target.id);
-      
-      console.log("Clicked on: " +n)
-      this.setState({ activePage: n }, ()=>{console.log("activePage is: " + this.state.activePage)});
-      
+      const n = parseInt(e.target.id);
+
+      console.log("Clicked on: " + n);
+      this.setState({ activePage: n }, () => {
+        console.log("activePage is: " + this.state.activePage);
+      });
     },
 
     //questions
@@ -29,8 +45,6 @@ export class Provider extends Component {
     questionsReady: [], //after adding new properties
     //no. of correct answers
     results: "",
-
-
 
     mode: "Testing", //default mode; other: 'Testing' and 'Reviewing'
 
@@ -51,12 +65,11 @@ export class Provider extends Component {
       }
     },
     // modals for the new test and reviewing
-    handleCloseResults: (e, {color}) => {
+    handleCloseResults: (e, { color }) => {
       console.log(color);
       this.setState({ modalOpenResults: false });
 
       if (color === "red") {
-    
         this.resetForm();
       } else if (e.target.value === "Review") {
         this.setState({ mode: "Reviewing" });
@@ -76,8 +89,6 @@ export class Provider extends Component {
     //pagination
     handlePaginationChange: (e, { activePage }) =>
       this.setState({ activePage }),
-
-   
 
     //adding new properties to selected question
 
@@ -116,9 +127,12 @@ export class Provider extends Component {
     removeAnswers: e => {
       console.log("Removing asnwers");
     }
-  };
+  }
+  this.baseState = this.state 
+}
 
   ////////////////////// End of State //////////////////////
+  
   
   showResults = () => {
     var length = this.state.questionsReady.length;
@@ -130,21 +144,17 @@ export class Provider extends Component {
       }
     }
 
-    this.setState({ results: rightAnswers }
-    );
+    this.setState({ results: rightAnswers });
   };
-
- 
 
   //reset State and leave questions loaded via session storage
 
   resetForm = () => {
-  
-          this.setState({ mode: "Testing" }, () => {
-            this.setState({ activePage: 1 }, ()=>{this.setState({selectedTestYesNo: 'no'}, ()=>{this.setState({selectedTest:''})})});
-          });
-        }
-  
+       //console.log(this.baseState);
+
+
+    this.setState(this.baseState);
+  };
 
   prepareQuestion = questions => {
     var rtr = questions.map(question => {
@@ -179,28 +189,24 @@ export class Provider extends Component {
   };
 
   loadQuestions = () => {
-
     //const s = 'pytania'.concat(this.state.selectedTest)
-    
+
     //edit json to point to keys
     axios
-    .get("https://my-json-server.typicode.com/lukaszbrk/demo2/db")
-    .then(res => {
-      this.setState({ questions: res.data[this.state.selectedTest] }, () => {
-        this.setState(
-          {
-            questionsReady: this.prepareQuestion(this.state.questions)
-          } /*()=> console.log(this.state.questionsReady[0]['All_with_keys']['r0'])*/
-        );
-      });
-    })
-    .catch(err => console.log(err));
-}
+      .get("https://my-json-server.typicode.com/lukaszbrk/demo2/db")
+      .then(res => {
+        this.setState({ questions: res.data[this.state.selectedTest] }, () => {
+          this.setState(
+            {
+              questionsReady: this.prepareQuestion(this.state.questions)
+            } /*()=> console.log(this.state.questionsReady[0]['All_with_keys']['r0'])*/
+          );
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
-
-
-
-/*
+  /*
 
   componentWillMount() {
     axios

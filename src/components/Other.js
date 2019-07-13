@@ -2,7 +2,7 @@ import List from "list.js";
 import React, { Component } from "react";
 import { Menu, Segment, Grid, Input } from "semantic-ui-react";
 
-const stylrforMenu = { border: "1px solid green", padding: "1px" };
+const styleforMenu = { border: "1px solid green", padding: "1px" };
 
 export default class Other extends Component {
   state = {
@@ -58,7 +58,7 @@ export default class Other extends Component {
           <Grid.Column width={3}>
             <Input icon="search" className="search" />
 
-            <Menu vertical style={stylrforMenu} className="list">
+            <Menu vertical style={styleforMenu} className="list">
               {tableRows}
             </Menu>
           </Grid.Column>

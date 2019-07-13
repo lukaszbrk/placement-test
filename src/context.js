@@ -4,7 +4,11 @@ import { shuffle } from "./tools.js";
 const Context = React.createContext();
 
 export class Provider extends Component {
-  state = {
+
+  constructor(props) {
+    super(props);
+
+  this.state = {
 
     //for pagination
     activePage: 1,
@@ -134,6 +138,8 @@ export class Provider extends Component {
     }
   };
 
+  this.baseState = this.state;
+  }
 ////////////////////// End of State //////////////////////
 
 
@@ -155,7 +161,7 @@ export class Provider extends Component {
     );
   }
 
-  baseState = this.state;
+ 
 
   //reset State and leave questions loaded via session storage
 
